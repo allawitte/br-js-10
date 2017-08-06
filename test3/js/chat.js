@@ -7,8 +7,11 @@ const messageStatus = msgTemplates.children[3];
 const messageContent = document.querySelector('.messages-content');
 const submit = document.querySelector('.message-submit');
 const input = document.querySelector('.message-input');
+
 const chatStatus = document.querySelector('.chat-status');
 const connection = new WebSocket('wss://neto-api.herokuapp.com/chat');
+const container = document.querySelector('.messages-content');
+container.style.overflow ='auto';
 
 connection.addEventListener('open'
     , () => {
@@ -43,6 +46,7 @@ function sendMsg(event) {
         messageContent.appendChild(tmpMsg);
         input.value = '';
     }
+    connection.send(JSON.stringify({message: input.value}));
 
 }
 function messageHandler(event) {
