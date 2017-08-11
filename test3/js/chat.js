@@ -20,9 +20,15 @@ connection.addEventListener('open'
     });
 
 connection.addEventListener('message', messageHandler);
+connection.addEventListener('close',closeHandler);
 
 submit.addEventListener('click', sendMsg);
 input.addEventListener('keydown', inputHandler);
+
+function closeHandler(){
+    submit.setAttribute('disabled', true);
+    chatStatus.textContent = chatStatus.dataset.offline;
+}
 
 function inputHandler(event) {
     event.preventDefault();
